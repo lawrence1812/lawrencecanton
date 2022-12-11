@@ -1,9 +1,13 @@
 :root {
     --colorPalette1: #ffffff;
     --colorPalette2: #a782ff;
-    --colorPalette3: #f911d3;
+    --colorPalette3: #8c1278;
     --colorPalette4: #3ad183;
     --colorPalette5: #adfc97;
+}
+@font-face {
+    font-family: 'Popsies';
+    src: url('Popsies.ttf');
 }
 
 * {
@@ -108,6 +112,9 @@ header .links a:hover{
     font-size: larger;
     font-weight: 800;
     
+}
+.box h3{
+    color: #462c4c;
 }
 .box h1:hover{
     font-weight: bold;
