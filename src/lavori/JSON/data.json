@@ -1,0 +1,93 @@
+{
+    "nome": "lawrence",
+    "cognome": "canton",
+    "Email": "lawrence.canton@gmail.com",
+    "nTelefono": "3711728037",
+    "città": "pero",
+    "codicePostale": "20016",
+    "provincia": "milano",
+    "dataNascita": "18/12/2004",
+    "luogoNascita": "milano",
+    "genere": "uomo",
+    "nazionalità": "italiana",
+    "sitoWeb": "/",
+    "competenze": [
+        {
+            "titolo": "scuola elementare",
+            "dataInizio": "2010",
+            "dataFine": "1015",
+            "nomeIstituto": "G. Marconi (Pero)",
+            "desc": "scuola primaria",
+            "listSkills": [
+                "scrivere"
+            ]
+        },
+        {
+            "titolo": "scuola media",
+            "dataInizio": "2015",
+            "dataFine": "1018",
+            "nomeIstituto": "D. Alighieri (Pero)",
+            "desc": "scuola secondaria di primo grado",
+            "listSkills": [
+                "patentino per il disegno tecnico in CAD"
+            ]
+        },
+        {
+            "titolo": "scuola superiore",
+            "dataInizio": "2018",
+            "dataFine": "in corso",
+            "nomeIstituto": "S. Cannizzaro (Rho)",
+            "desc": "Primi al approcci al mondo della programmazione java e alla logica di programmazione, sviluppo di siti WEB con HTML css e JavaScript, gestione di database con PHP.",
+            "listSkills": [
+                "scrivere applicazioni java",
+                "sviluppo lato WEB con HTML css e JavaScript",
+                "gestione lato server PHP di database MySQL",
+                "gestione database SQLite",
+                "programmazione in WIRE per progetti di domotica",
+                "utilizzo di software per la modellazione e stampa 3D come CURA e Blender"
+            ]
+        },
+        {
+            "titolo": "Esperienza lavorativa",
+            "dataInizio": "2022",
+            "dataFine": "202",
+            "nomeIstituto": "OperaLogica (Garbagnate)",
+            "desc": "alternanza scuola lavoro, presso OperaLogica",
+            "listSkills": [
+                "introduzione C#",
+                "database non relazionali",
+                "sviluppo mobile Dart Flutter",
+                "front-end typescript framework AngularJS",
+                "piccola introduzione al mondo UI/UX (mockup, wireframe)",
+                "utilizzo di software per lavoro collettivo git, gitHub",
+                "tecniche di progettazione (Brainstorming, briefing, ecc.)"
+            ]
+        }
+    ],
+
+    "lingue": [
+        {
+            "lingua" : "italiano",
+            "rate" : 4
+        },
+        {
+            "lingua" : "inglese",
+            "rate" : 2
+        },
+        {
+            "lingua" : "spagnolo",
+            "rate" : 1
+        }
+        
+    ],
+    "hobby": [
+        "camminare in montagna",
+        "attività sportive",
+        "ciclismo",
+        "programmazione",
+        "stampa 3D",
+        "nuove tecnologie"
+    ],
+
+    "imgProfile" : "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"
+}

@@ -1,0 +1,23 @@
+[
+    
+    {
+        "title": "CSV",
+        "description": "presentazione dati in tabella",
+        "path" :"src/lavori/CSV/tabellaCasiCovid.html"
+    },
+    {
+        "title": "JSON",
+        "description": "creazione di un curriculum",
+        "path": "src/lavori/JSON/CurriculumVitae.html"
+    },
+    {
+        "title": "-",
+        "description": "description",
+        "path": ""
+    },
+    {
+        "title": "-",
+        "description": "description",
+        "path": ""
+    }
+]

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio CSV</title>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.1/papaparse.min.js"></script>
+
+</head>
+
+<body>
+    <main class="mainContent">
+        <div class="filtro">
+            <input type="date" value="2021-02-24" id="date">
+            <select id="field"></select>
+            <div style="display : flex; justify-content: center; ">
+                <button class="button" onclick="printTableFiltered()">Filtra</button>
+                <button class="button" onclick="printTable()" style="background-color: #9f160d;">Rimuovi</button>
+            </div>
+
+        </div>
+
+
+        <table class="fl-table">
+            <thead id="table-head"></thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </main>
+</body>
+
+<script>
+
+    const url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-andamento-nazionale/dpc-covid19-ita-andamento-nazionale.csv";
+    var strFile = readFile(url);
+    var parseCSV = Papa.parse(strFile);
+    printSelect();
+
+    printTable();
+
+
+    function printSelect() {
+        var str = "";
+        str += "<option value='" + parseCSV.data[0].length + "'>";
+        str += "seleziona";
+        str += "</option>";
+        for (var i = 0; i < parseCSV.data[0].length; i++) {
+            str += "<option value='" + i + "'>";
+            str += parseCSV.data[0][i];
+            str += "</option>";
+        }
+        document.getElementById("field").innerHTML = str;
+    }
+    function printTableHead(num) {
+        var str = "";
+        str += "<tr>";
+        for (var i = 0; i < num; i++) {
+            str += "<td> " + parseCSV.data[0][i] + "</td>";
+        }
+        str += "</tr>";
+        document.getElementById("table-head").innerHTML = str;
+    }
+    function printTable() {
+        printTableHead(parseCSV.data[0].length);
+        str = "";
+        for (var i = 1; i < parseCSV.data.length; i++) {
+            str += "<tr> ";
+            for (var j = 0; j < parseCSV.data[0].length; j++) {
+                str += "<td> " + parseCSV.data[i][j] + "</td>";
+            }
+            str += "</tr> ";
+        }
+        document.getElementById("table-body").innerHTML = str;
+    }
+
+    function readFile(file) {
+        var request = new XMLHttpRequest();
+        request.open('GET', file, false);
+        request.send(null);
+        if (request.status == 200)
+            return request.responseText;
+    };
+
+    function printTableFiltered() {
+        var date = document.getElementById("date").value;
+        var field = document.getElementById("field").value;
+        printTableHead(field);
+        str = "";
+
+        date = new Date(date);
+        var date2;
+        for (var i = 1; i < parseCSV.data.length; i++) {
+            date2 = new Date(parseCSV.data[i][0]);
+            if (date.getDate() == date2.getDate() && date.getMonth() == date2.getMonth() && date.getYear() == date2.getYear()) {
+                str += "<tr> ";
+                for (var j = 0; j < field; j++) {
+                    str += "<td> " + parseCSV.data[i][j] + "</td>";
+                }
+                str += "</tr> ";
+            }
+
+        }
+
+        document.getElementById("table-body").innerHTML = str;
+    }
+
+
+
+
+
+</script>
+
+<style>
+    :root {
+        --tableColor: #009879;
+    }
+
+    * {
+        font-family: sans-serif;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+        font: sans-serif;
+
+    }
+
+    .mainContent {
+        width: 100%;
+        min-height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
+        background-color: #ffffff;
+
+    }
+
+
+
+    .fl-table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        min-width: 400px;
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+        box-shadow: 0 0 20px #00000026;
+    }
+
+
+    .fl-table thead tr {
+        background-color: var(--tableColor);
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .fl-table thead tr td a {
+        color: #ffffff;
+        text-decoration: underline;
+    }
+
+    .fl-table th,
+    .fl-table td {
+        padding: 12px 15px;
+    }
+
+    .fl-table tbody tr {
+        border-bottom: 0.8px solid #dddddd;
+    }
+
+    /*style esclusivo per elementi posti in posizione pari nella sezione body della tabella*/
+    .fl-table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+
+    /*style esclusivo per elementi posti in posizione dispari nella sezione body della tabella*/
+    .fl-table tbody tr:nth-of-type(odd) {
+        background-color: #ffffff;
+    }
+
+    /*alla fine della tabella aggiunge una linea colorata*/
+    .fl-table tbody tr:last-of-type {
+        border-bottom: 2px solid var(--tableColor);
+    }
+
+    .fl-table tbody tr.active-row {
+        font-weight: bold;
+        color: var(--tableColor);
+    }
+
+    a {
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .button {
+        color: white;
+        background-color: var(--tableColor);
+        font-size: large;
+        font-weight: bold;
+        border-radius: 3px;
+        cursor: pointer;
+        margin: 5px;
+        padding: 5px;
+        text-align: center;
+        border: solid black 0.2px;
+
+    }
+
+    .filtro {
+        width: 100%;
+        padding-top: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+    }
+
+    .filtro input[type="date"],
+    select {
+        max-width: 200px;
+        padding: 20px;
+        border: solid 1px #444;
+        border-radius: 5px;
+        font-size: large;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
+
+</html>

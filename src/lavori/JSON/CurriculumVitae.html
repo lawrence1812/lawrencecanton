@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+    <div class="curriculum">
+        <div class="divider">
+            <span class="material-symbols-rounded">person</span>
+            <h3>Personale</h3>
+        </div>
+        <div class="dataSectionProfile">
+            <div class="keys">
+                <span>Nome</span>
+                <span>Numero telefonico</span>
+                <span>E-mail</span>
+                <span>Città</span>
+                <span>Data di nascita</span>
+                <span>Genere</span>
+                <span>Nazionalità</span>
+            </div>
+            <div class="value">
+                <span id="Nome"></span>
+                <span id="Numero telefonico"></span>
+                <span id="Email"></span>
+                <span id="Città"></span>
+                <span id="Data"></span>
+                <span id="Genere"></span>
+                <span id="Nazionalità"></span>
+            </div>
+
+            <div id="imgProfile" class="imgProfile"> 
+
+            </div>
+
+        </div>
+
+        <div class="divider">
+            <span class="material-symbols-rounded">school</span>
+            <h3>Educazione e Qualifiche</h3>
+        </div>
+        <div class="dataSection">
+            <div class="keys">
+                <span id="competenze"></span>
+            </div>
+        </div>
+
+        <div class="divider">
+            <span class="material-symbols-rounded">public</span>
+            <h3>Lingue</h3>
+        </div>
+        <div class="dataSection">
+            <div class="keys">
+                <span id="lingue"></span>
+            </div>
+        </div>
+
+        <div class="divider">
+            <span class="material-symbols-rounded">explore</span>
+            <h3>Hobby e Interessi</h3>
+        </div>
+        <div class="dataSection">
+            <div class="keys">
+                <span id="hobby"></span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+    function readJSON(file) {
+        var request = new XMLHttpRequest();
+        request.open('GET', file, false);
+        request.send(null);
+        if (request.status == 200)
+            return request.responseText;
+    };
+
+    var StringJSON = readJSON('data.json');
+    var parseJSON = JSON.parse(StringJSON);
+
+
+    document.getElementById("Nome").innerHTML = parseJSON.nome + " " + parseJSON.cognome;
+    document.getElementById("Numero telefonico").innerHTML = parseJSON.nTelefono;
+    document.getElementById("Email").innerHTML = parseJSON.Email;
+    document.getElementById("Città").innerHTML = parseJSON.città + " " + parseJSON.provincia + " (" + parseJSON.codicePostale + ")";
+    document.getElementById("Data").innerHTML = parseJSON.dataNascita;
+    document.getElementById("Genere").innerHTML = parseJSON.genere;
+    document.getElementById("Nazionalità").innerHTML = parseJSON.nazionalità;
+    document.getElementById("competenze").innerHTML = qualificheToHTML();
+    document.getElementById("hobby").innerHTML = hobbyToHTML();
+    document.getElementById("lingue").innerHTML = lingueToHTML();
+    document.getElementById("imgProfile").innerHTML = imgProfileToHTML();
+
+    function qualificheToHTML() {
+        var str = "";
+        for (var i = 0; i < parseJSON.competenze.length; i++) {
+
+            str += "<h4>" + parseJSON.competenze[i].titolo + "</h4>";
+            str += parseJSON.competenze[i].dataInizio;
+            str += " - ";
+            str += parseJSON.competenze[i].dataFine;
+            str += "<br>";
+            str += parseJSON.competenze[i].nomeIstituto;
+            str += "<br>";
+            str += parseJSON.competenze[i].desc;
+            str += "<br>";
+            str += "<ul>";
+            for (var j = 0; j < parseJSON.competenze[i].listSkills.length; j++) {
+                str += "<li>";
+                str += parseJSON.competenze[i].listSkills[j];
+                str += "</li>";
+            }
+            str += "</ul>";
+        }
+        return str;
+    }
+
+    function hobbyToHTML() {
+        var str = "";
+        str = "<ul>";
+        for (var i = 0; i < parseJSON.hobby.length; i++) {
+            str += "<li>";
+            str += parseJSON.hobby[i];
+            str += "</li>";
+        }
+        str += "<ur>";
+        return str;
+    }
+
+    function lingueToHTML() {
+        var str = "";
+        for (var i = 0; i < parseJSON.lingue.length; i++) {
+            str += "<h4>";
+            str += parseJSON.lingue[i].lingua + ": ";
+            for (var j = 0; j < parseJSON.lingue[i].rate; j++) {
+                str += '<span class="material-symbols-rounded">grade</span>';
+            }
+            str += "</h4>";
+        }
+        return str;
+    }
+
+    function imgProfileToHTML() {
+        var str = '<img src="data:image/jpg;base64,';
+        str += parseJSON.imgProfile;
+        str += '">';
+        console.log(str);
+        return str;
+    }
+</script>
+
+<style>
+    :root {
+        margin: 0px;
+        padding: 0px;
+        font-family: sans-serif;
+        background-color: #00000038;
+    }
+    body {
+        display: flex;
+        justify-content: center;
+    }
+
+    .curriculum {
+        background-color: white;
+        width: 700px;
+        height: auto;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .divider {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+        background-color: #d2cfcf;
+        margin-top: 20px;
+        text-align: left;
+        font-size: 15px;
+        font-weight: 200;
+        padding-left: 20px;
+    }
+
+    .divider h3 {
+        padding-left: 30px;
+    }
+
+    .dataSection,
+    .dataSectionProfile,
+    .competenze,
+    .hobby {
+        padding-top: 20px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .dataSection .dataSectionProfile,
+    .keys,
+    .value {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dataSection .dataSectionProfile,
+    .value {
+        padding-left: 20px;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .dataSectionProfile {
+        justify-content: space-around;
+    }
+
+    .imgProfile img{
+        border-radius: 50%;
+        border: solid black 0.1px;
+        width: 140px;
+    }
+</style>
