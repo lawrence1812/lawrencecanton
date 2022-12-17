@@ -5,6 +5,7 @@
     --colorPalette4: #3ad183;
     --colorPalette5: #adfc97;
 }
+
 @font-face {
     font-family: 'Popsies';
     src: url('Popsies.ttf');
@@ -60,10 +61,11 @@ header .links {
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
-    justify-content:space-between;
+    justify-content: space-between;
     align-content: flex-start;
 }
-header .links a{
+
+header .links a {
     color: whitesmoke;
     text-decoration: none;
     font-size: 30px;
@@ -71,9 +73,10 @@ header .links a{
     font-weight: 600;
 }
 
-header .links a:hover{
+header .links a:hover {
     color: white;
 }
+
 .title {
     padding: 50px;
     font-family: 'popsies', Arial;
@@ -107,16 +110,27 @@ header .links a:hover{
     box-shadow: 10px 5px 5px rgba(68, 68, 68, 0.4);
 }
 
-.box h1{
+.box h1 {
     color: var(--colorPalette4);
     font-size: larger;
     font-weight: 800;
-    
+
 }
-.box h3{
+
+.box h3 {
     color: #462c4c;
 }
-.box h1:hover{
+
+.box h1:hover {
     font-weight: bold;
     text-decoration: underline;
+}
+
+@supports (display: flex) {
+    @media screen and (min-width: 900px) {
+
+        .wrapper {
+            min-width: auto;
+        }
+    }
 }

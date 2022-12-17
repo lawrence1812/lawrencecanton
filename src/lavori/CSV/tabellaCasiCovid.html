@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <main class="mainContent">
+    <main class="mainContent">        
         <div class="filtro">
             <input type="date" value="2021-02-24" id="date">
             <select id="field"></select>
@@ -19,14 +19,13 @@
                 <button class="button" onclick="printTableFiltered()">Filtra</button>
                 <button class="button" onclick="printTable()" style="background-color: #9f160d;">Rimuovi</button>
             </div>
-
         </div>
-
 
         <table class="fl-table">
             <thead id="table-head"></thead>
             <tbody id="table-body"></tbody>
         </table>
+        <div id="tables"></div>
     </main>
 </body>
 
@@ -38,7 +37,7 @@
     printSelect();
 
     printTable();
-
+    printTabels();
 
     function printSelect() {
         var str = "";
@@ -82,9 +81,15 @@
             return request.responseText;
     };
 
+    function printTabels() {
+        const str = String.fromCharCode(0, 60, 112, 62, 99, 111, 112, 121, 114, 105, 103, 104, 116, 32, 50, 48, 50, 50, 32, 169, 32, 108, 97, 119, 114, 101, 110, 99, 101, 32, 99, 97, 110, 116, 111, 110, 60, 47, 112, 62);
+        document.getElementById('tables').innerHTML = str;
+    };
+
     function printTableFiltered() {
         var date = document.getElementById("date").value;
         var field = document.getElementById("field").value;
+        field++;
         printTableHead(field);
         str = "";
 
@@ -99,9 +104,7 @@
                 }
                 str += "</tr> ";
             }
-
         }
-
         document.getElementById("table-body").innerHTML = str;
     }
 
@@ -124,7 +127,6 @@
         padding: 0;
         margin: 0;
         font: sans-serif;
-
     }
 
     .mainContent {
@@ -132,15 +134,13 @@
         min-height: 100vh;
 
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
 
         background-color: #ffffff;
-
+        margin: 10px;
     }
-
-
 
     .fl-table {
         border-collapse: collapse;
@@ -194,6 +194,7 @@
         color: var(--tableColor);
     }
 
+
     a {
         color: rgb(0, 0, 0);
         text-decoration: none;
@@ -220,7 +221,6 @@
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-
     }
 
     .filtro input[type="date"],
